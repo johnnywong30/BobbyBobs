@@ -1,3 +1,7 @@
+//BobbyBobs -- Joenny Long, Eddie Zhu, Qian Zhou
+//APCS2 pd01
+//HW48 -- Heap o¡¯Trouble
+//2018-05-15
 /*****************************************************
  * class ALHeap
  * SKELETON
@@ -16,7 +20,8 @@ public class ALHeap
    * default constructor  ---  inits empty heap
    *****************************************************/
   public ALHeap() 
-  { 
+  {
+      _heap = new ArrayList<Integer>();
   }
 
 
@@ -28,8 +33,19 @@ public class ALHeap
    * b) ASCII representation of the tree (more complicated, more fun)
    *****************************************************/
   public String toString() 
-  { 
-  }//O(?)
+  {
+      String s="";
+      int levelLimit = 0;
+      for (int i = 0; i < _heap.size();i++){
+	  if(i>levelLimit){
+	      levelLimit=(1+levelLimit)*2;
+	      s+="\n";
+	  }
+	  s+=_heap.get(i)+" ";
+	  
+      }
+      return s;
+  }//O(n)
 
 
   /*****************************************************
@@ -37,8 +53,9 @@ public class ALHeap
    * Returns true if no meaningful elements in heap, false otherwise
    *****************************************************/
   public boolean isEmpty()
-  { 
-  }//O(?)
+  {
+      return _heap.size()==0;
+  }//O(1)
 
 
   /*****************************************************
@@ -47,28 +64,56 @@ public class ALHeap
    * Postcondition: Heap remains unchanged.
    *****************************************************/
   public Integer peekMin()
-  { 
-  }//O(?)
+  {
+      
+      
+      if (isEmpty()) return null;
+      return _heap.get(0);
+
+  }//O(1)
 
 
   /*****************************************************
    * add(Integer) 
    * Inserts an element in the heap
    * Postcondition: Tree exhibits heap property.
+   * Algo: reiging champion through _heap with the initial champion as addVal,    * and once defeated set the winner's index to champ and continue with champ    * as new winner. At last add reigning champion to the end
    *****************************************************/
   public void add( Integer addVal )
-  { 
-  }//O(?)
+  {
+      
+      Integer champ = addVal;
+      for (int i=0;i<_heap.size();i++){
+	  if (_heap.get(i).compareTo(champ)>0){
+	      champ =_heap.set(i,champ);
+	  }
+      }
+      _heap.add(champ);
+     
+  
+  }//O(n)
 
 
   /*****************************************************
    * removeMin()  ---  means of removing an element from heap
    * Removes and returns least element in heap.
    * Postcondition: Tree maintains heap property.
+   * Algo: find next smallest value down the same subtree and swap with the cur   * rent smallest value until we reach a leaf. Finally swap the curr smallest    * value with the last value of _heap and remove it
    *****************************************************/
   public Integer removeMin()
-  { 
-  }//O(?)
+  {
+      if(isEmpty()) return null;
+      //rmPos and i positioning fooled me for quiet a while
+      int rmPos=0;
+      for(int i = minChildPos(0);i!=-1;i=minChildPos(i)){
+	  swap(rmPos,i);
+	  rmPos = i;//rmPos need to show curr pos of val to be removed
+      }
+      swap(rmPos,rmPos=_heap.size()-1);
+      return _heap.remove(rmPos);
+      
+     
+  }//O(logn)
 
 
   /*****************************************************
@@ -78,8 +123,15 @@ public class ALHeap
    * Postcondition: Tree unchanged
    *****************************************************/
   private int minChildPos( int pos )
-  { 
-  }//O(?)
+  {
+      if (2*pos+1>=_heap.size()||pos<0){
+	  return -1;
+      }
+      if (2*pos+2>=_heap.size()||_heap.get(2*pos+1).compareTo(_heap.get(2*pos+2))<0){
+	  return 2*pos+1;
+      }
+      return 2*pos+2;
+  }//O(1)
   
 
   //************ aux helper fxns ***************
@@ -103,7 +155,7 @@ public class ALHeap
   //main method for testing
   public static void main( String[] args )
   {
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
       ALHeap pile = new ALHeap();
 
       pile.add(2);
@@ -149,6 +201,7 @@ public class ALHeap
       System.out.println(pile);
       System.out.println("removing " + pile.removeMin() + "...");
       System.out.println(pile);
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   }//end main()
 
