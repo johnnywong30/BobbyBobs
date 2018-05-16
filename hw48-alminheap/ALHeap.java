@@ -77,7 +77,9 @@ public class ALHeap
    * add(Integer) 
    * Inserts an element in the heap
    * Postcondition: Tree exhibits heap property.
-   * Algo: reiging champion through _heap with the initial champion as addVal,    * and once defeated set the winner's index to champ and continue with champ    * as new winner. At last add reigning champion to the end
+   * Algo: reiging champion through _heap with the initial champion as addVal,
+   * and once defeated set the winner's index to champ and continue with champ 
+   * as new winner. At last add reigning champion to the end
    *****************************************************/
   public void add( Integer addVal )
   {
@@ -98,7 +100,9 @@ public class ALHeap
    * removeMin()  ---  means of removing an element from heap
    * Removes and returns least element in heap.
    * Postcondition: Tree maintains heap property.
-   * Algo: find next smallest value down the same subtree and swap with the cur   * rent smallest value until we reach a leaf. Finally swap the curr smallest    * value with the last value of _heap and remove it
+   * Algo: find next smallest value down the same subtree and swap with the cur 
+   * rent smallest value until we reach a leaf. Finally swap the curr smallest 
+   * value with the last value of _heap and remove it
    *****************************************************/
   public Integer removeMin()
   {
