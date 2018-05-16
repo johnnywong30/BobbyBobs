@@ -1,6 +1,6 @@
-//BobbyBobs -- Joenny Long, Eddie Zhu, Qian Zhou
+//BobbyBobs -- Johnny Wong, Eddie Zhu, Qian Zhou
 //APCS2 pd01
-//HW48 -- Heap o¡¯Trouble
+//HW48 -- Heap oÂ¡Â¯Trouble
 //2018-05-15
 /*****************************************************
  * class ALHeap
