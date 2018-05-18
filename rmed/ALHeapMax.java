@@ -53,6 +53,10 @@ public class ALHeapMax
       return _heap.size()==0;
   }//O(1)
 
+    public int size(){
+	return _heap.size();
+    }
+
 
   /*****************************************************
    * Integer peekMax()
